@@ -31,7 +31,11 @@ User.findOne({
 }).then(function(user) {
   console.log(user.get({
     plain:true
-  }))
+  }));
+  user.password = md5("987654");
+  user.save().then(function(u) {
+    console.log(u);
+  });
 });
 
 //
