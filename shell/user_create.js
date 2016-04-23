@@ -1,7 +1,15 @@
 var Sequelize = require('sequelize');
 var config_db = require("./config_db");
 
-var sequelize = new Sequelize(config_db.database, config_db.username, config_db.password);
+var sequelize = new Sequelize(config_db.database, config_db.username, config_db.password,{
+  host: config_db.host,
+  dialect: "mysql",
+  pool: {
+    max: 5,
+    min: 0,
+    idle: 10000
+  }
+});
 
 
 var User = sequelize.define('user', {
