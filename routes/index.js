@@ -8,8 +8,11 @@ router.get('/', function(req, res, next) {
 
 
 router.post('/login',function(req,res,next) {
+  var i_user = require("../interface/i_user");
+
   console.log(req.body.username);
   console.log(req.body.password);
-  res.send(req.params);
+  // res.send(req.params);
+  i_user.auth(req.body.username,req.body.password);
 });
 module.exports = router;
