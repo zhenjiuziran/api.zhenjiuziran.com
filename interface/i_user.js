@@ -1,4 +1,4 @@
-var User = require("./modles/user");
+var User = require("./models/user");
 
 var i_user = {
   auth: function(username,password) {
