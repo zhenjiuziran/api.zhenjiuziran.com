@@ -14,7 +14,11 @@ router.post('/login',function(req,res,next) {
   console.log(req.body.password);
   // res.send(req.params);
   i_user.auth(req.body.username,req.body.password)(function(err,content) {
-    res.send(content);
+    if(!err) {
+      res.send({code:0,msg:"login success"});
+    } else {
+      res.send({code:err,msg:content});
+    }
   });
 });
 module.exports = router;

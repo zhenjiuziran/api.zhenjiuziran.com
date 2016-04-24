@@ -13,9 +13,9 @@ var auth = function(username,password,callback) {
       }
     }).then(function(user) {
       console.log(user);
-      callback(null,user);
+      callback(null,"login success");
     },function() {
-      callback(101);
+      callback(101,"auth failed");
       console.log("Not found user");
     });
 }
