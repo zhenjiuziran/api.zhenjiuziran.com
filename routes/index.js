@@ -13,6 +13,8 @@ router.post('/login',function(req,res,next) {
   console.log(req.body.username);
   console.log(req.body.password);
   // res.send(req.params);
-  i_user.auth(req.body.username,req.body.password);
+  i_user.auth(req.body.username,req.body.password)(function(err,content) {
+    res.send(content);
+  });
 });
 module.exports = router;

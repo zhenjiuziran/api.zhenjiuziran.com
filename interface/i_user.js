@@ -1,7 +1,8 @@
 var User = require("./models/user");
 var md5 = require("md5");
-var i_user = {
-  auth: function(username,password) {
+var thunkify = require("thunkify");
+
+var auth = function(username,password,callback) {
     console.log(username,password);
     User.findOne({
       where: {
@@ -10,8 +11,13 @@ var i_user = {
       }
     }).then(function(user) {
       console.log(user);
+      callback(null,user);
+    },function() {
+      callback(101);
+      console.log("Not found user");
     });
-  }
 }
+
+i_user.auth = thunkify(auth);
 
 module.exports = i_user;
