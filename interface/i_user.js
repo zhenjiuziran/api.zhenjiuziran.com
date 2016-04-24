@@ -2,6 +2,8 @@ var User = require("./models/user");
 var md5 = require("md5");
 var thunkify = require("thunkify");
 
+var i_user = {};
+
 var auth = function(username,password,callback) {
     console.log(username,password);
     User.findOne({
