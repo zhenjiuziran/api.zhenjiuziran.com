@@ -1,4 +1,6 @@
 var Sequelize = require('sequelize');
+var md5 = require("md5");
+
 var config_db = require("./config_db");
 
 var sequelize = new Sequelize(config_db.database, config_db.username, config_db.password,{
@@ -22,9 +24,24 @@ var User = sequelize.define('user', {
   tableName: "users"
 });
 
-User.create({
-  username:"admin",
-  password:"987654"
+User.findOne({
+  where: {
+    username: "admin"
+  }
 }).then(function(user) {
-  console.log(user.get({plain:true}))
+  console.log(user.get({
+    plain:true
+  }));
+  user.password = md5("987654");
+  user.save().then(function(u) {
+    console.log(u);
+  });
 });
+
+//
+// User.create({
+//   username:"admin",
+//   password:"987654"
+// }).then(function(user) {
+//   console.log(user.get({plain:true}))
+// });
